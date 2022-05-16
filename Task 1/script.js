@@ -19,19 +19,18 @@ let pounds;
 let oz;
 
 submitButttonEl.addEventListener("click", submitForm);
-submitButttonEl.addEventListener("keypress", submitForm);
 
 function submitForm(e) {
   e.preventDefault();
   outputEl.innerHTML = "";
-  if (Number.isNaN(Number.parseFloat(inputEl.value))) {
+  if (Number.isNaN(Number.parseFloat(inputEl.value.replace(",", ".")))) {
     inputErrorsEl.textContent = "* Įrašykite skaičių";
   } else {
-    grams = inputEl.value * 1000;
-    pounds = inputEl.value * 2.2046;
-    oz = inputEl.value * 35.274;
+    grams = inputEl.value.replace(",", ".") * 1000;
+    pounds = inputEl.value.replace(",", ".") * 2.2046;
+    oz = inputEl.value.replace(",", ".") * 35.274;
     inputErrorsEl.textContent = "";
-    console.log(grams);
+
     let kilogramsEl = document.createElement("p");
     kilogramsEl.textContent = inputEl.value + " kilogramų / ai";
     let poundsEl = document.createElement("p");
@@ -40,7 +39,7 @@ function submitForm(e) {
     gramsEl.textContent = grams + " gramų / ai";
     let ozEl = document.createElement("p");
     ozEl.textContent = oz + " uncijų / os";
-    console.log(outputEl);
+
     outputEl.appendChild(kilogramsEl);
     outputEl.appendChild(poundsEl);
     outputEl.appendChild(gramsEl);
